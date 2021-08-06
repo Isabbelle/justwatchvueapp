@@ -1,19 +1,22 @@
 <template>
   <div class="card">
-    <img v-bind:href="movie.poster"/>
+    <img v-bind:href="movie.poster" />
     <h3>Title: {{ movie.title }}</h3>
     <p>Type: {{ movie.object_type }}</p>
     <div class="result-link">
-      <p>Link: <a
-        v-bind:href="'https://www.justwatch.com' + movie.full_path"
-        target="_blank"
-        >Go to JustWatch</a
-      ></p>
+      <p>
+        Link:
+        <a
+          v-bind:href="'https://www.justwatch.com' + movie.full_path"
+          target="_blank"
+          >Go to JustWatch</a
+        >
+      </p>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Card",
   props: ["movie"],

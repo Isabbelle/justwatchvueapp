@@ -21,9 +21,48 @@
   </main>
 </template>
 
-<script>
+<script lang="ts">
 import _ from "lodash";
 import Card from "./components/Card.vue";
+interface score {
+  provider_type: string;
+  value: number;
+}
+interface offers {
+  jw_entity_id: string;
+  type: string;
+  monetization_type: string;
+  provider_id: number;
+  retail_price: number;
+  last_change_retail_price: number;
+  last_change_difference: number;
+  last_change_percent: number;
+  last_change_date: string;
+  last_change_date_provider_id: string;
+  currency: string;
+  urls: {
+    standard_web: string;
+  };
+  presentation_type: string;
+  element_count: number;
+  new_element_count: number;
+  country: string;
+}
+interface MovieList {
+  jw_entity_id: string;
+  id: number;
+  title: string;
+  full_path: string;
+  full_paths: {
+    SHOW_DETAIL_OVERVIEW: string;
+  };
+  poster: string;
+  poster_blur_hash: string;
+  original_release_year: number;
+  object_type: string;
+  offers: offers[];
+  scoring: score[];
+}
 
 export default {
   components: { Card },
@@ -35,8 +74,8 @@ export default {
 
   data() {
     return {
-      searchQuery: "",
-      movieList: [],
+      searchQuery: "" as string,
+      movieList: [] as MovieList[],
     };
   },
 
@@ -46,23 +85,25 @@ export default {
     },
   },
   created: function() {
-    this.debouncedGetMovieData = _.debounce(this.getMovieData, 500);
+    this.debouncedGetMovieData = _.debounce(
+      this.getMovieData,
+      500
+    ) as () => void;
   },
   methods: {
-    getMovieData: async function() {
+    getMovieData(): void {
       const body = {
         page_size: 50,
         query: this.searchQuery,
         content_types: ["show", "movie"],
       };
-      this.movieList = await fetch(
+      this.movieList = fetch(
         `https://apis.justwatch.com/content/titles/en_US/popular?language=en&body=${JSON.stringify(
           body
         )}`
       )
         .then((response) => response.json())
         .then((results) => results.items);
-      console.log(this.movieList);
     },
   },
 };
