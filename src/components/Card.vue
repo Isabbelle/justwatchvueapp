@@ -2,7 +2,7 @@
   <div class="card">
     <img v-bind:href="movie.poster"/>
     <h3>Title: {{ movie.title }}</h3>
-    <p>Type: {{ movie.object_type }}</p>
+    <p class="type">Type: {{ movie.object_type }}</p>
     <div class="result-link">
       <p>Link: <a
         v-bind:href="'https://www.justwatch.com' + movie.full_path"
@@ -22,21 +22,25 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  flex: 1 1 33%;
-  width: 33%;
+  flex: 1 1 33% ;
   max-width: 33%;
+  padding: 0px 20px;
+ 
+  .result-link{
+   margin: 1rem;
+   width: 33%;
+   padding: 0px 8px;
+   text-decoration: none;
+  
+}
+.type{
+  margin: 1rem;
   padding: 0px 8px;
-  margin-bottom: 16px;
-
-  img {
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transition: 0.4s;
-  }
+}
+  
   h3 {
-    padding: 16px;
-    color: #666;
+    padding: 9px;
+    color: black;
     transition: 0.4s;
   }
   &:hover {
@@ -44,8 +48,17 @@ export default {
       transform: scale(1.05);
     }
     h3 {
-      color: #24c444;
+      color: #9858cc;
     }
+    a{
+       color: #9858cc;
+        transition: 0.4s;
+    }
+  }
+  a{
+    text-decoration:none;
+    color: black;
+    font-weight: 600;
   }
 }
 </style>
