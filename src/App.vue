@@ -118,9 +118,7 @@ h1 {
   box-sizing: border-box;
   font-family: "Fira Sans", sans-serif;
 }
-a {
-  text-decoration: none;
-}
+
 
 main {
   max-width: 1200px;
